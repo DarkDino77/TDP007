@@ -13,8 +13,6 @@ def n_times(value, &block)
     return value # Specificerar return för att enkelt veta vad functionen returnera
 end
 
-n_times(3) { puts "Hello!" }
-
 class Repeat
     def initialize(value)
         @value = value
@@ -25,9 +23,7 @@ class Repeat
     end
 end
 #hur gör man dessa tester
-do_three = Repeat.new(3)
 
-do_three.each { puts "Hooray!" }
 
 #Uppgift2 
 #Fråga klass kamrat och chatgpt om hur Range#inject
@@ -194,7 +190,13 @@ end
 class Test_sem < Test::Unit::TestCase
 
     def test_upg1
-        assert_equal(3, n_times(3) { puts "Hello!" }, "Error")
+        i = 0
+        n_times(3) { i+=1 }
+        assert_equal(3, i, "Error")
+        i = 0
+        do_three = Repeat.new(3)
+        do_three.each { i+=1 }
+        assert_equal(3, i, "Error")
     end
 
     def test_upg2
@@ -276,8 +278,6 @@ class Test_sem < Test::Unit::TestCase
     def test_upg11
         require 'open-uri.rb'
         html = URI.open("http://www.google.com/") { |f| f.read }
-
-        assert_equal([2, 3, 1], tag_names(html), "Error")
-        assert_equal([1, 2, 3], [1,2,3].rotate_left(3), "Error")
+        assert_equal([["html"], ["head"], ["meta"], ["title"], ["script"], ["style"], ["g"], ["body"], ["div"], ["nobr"], ["b"], ["a"], ["u"], ["span"], ["center"], ["br"], ["img"], ["form"], ["table"], ["tr"], ["td"], ["input"], ["p"], ["k"]], tag_names(html), "Error")
     end
 end
