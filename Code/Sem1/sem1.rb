@@ -86,6 +86,7 @@ class PersonName
     end
 end
 
+#uppgift 6
 class Person 
     def initialize(name = "", surname = "", age = 0)
         @name = PersonName.new()
@@ -112,7 +113,85 @@ class Person
     end
 end
 
-class Test_sem <Test::Unit::TestCase
+# Uppgift 7
+# Kålla hur man accesa inbygda klasser i föreläsning slidens
+# Self fick från chat gpt
+class Integer
+    def fib()
+        if self == 0
+            return self 
+        elsif self <= 1 
+            return 1
+        end
+        return (self-1).fib + (self-2).fib
+    end
+end
+
+#Uppgift8
+class String
+    def acronym
+        words = self.split
+        acronym = ""
+        for word in words do
+            # FÖ2
+            if word[0] =~ /[a-zA-z]/
+                acronym += word[0].upcase
+            end
+        end
+        return acronym
+    end
+end
+
+#Uppgift 9
+class Array
+    def rotate_left(steps = 1)
+        length = self.size
+        if steps%length == 0; return self; end
+        steps.times do 
+            for i in (0..length) do
+                temp = self.shift
+                self.push(temp)
+            end
+        end
+        return self
+    end
+end
+
+#Uppgift 10
+def find_username(str)
+    reg = /([a-öA-Ö]+: )(.*)/.match(str)
+
+    if not reg 
+        return ""
+    end
+
+    return reg[2] 
+end
+
+#Uppgitf 11 
+
+# require 'net/http'
+
+# url = URI.parse('http://www.google.com/')
+# http = Net::HTTP.new(url.host, url.port)
+
+# response = http.request(Net::HTTP::Get.new(url.path))
+# html = response.body
+# puts html
+
+
+
+def tag_names(html)
+    matches = html.scan(/<([a-z]+).*?>/).uniq
+    return matches
+end
+
+#Uppgift 12
+def regnr?(str)
+    #return \[A\.find(str).bool
+end
+
+class Test_sem < Test::Unit::TestCase
 
     def test_upg1
         assert_equal(3, n_times(3) { puts "Hello!" }, "Error")
@@ -157,5 +236,48 @@ class Test_sem <Test::Unit::TestCase
         assert_equal("Dennis Abrikossov", new_person.fullname, "Error")
         assert_equal(26, new_person.age, "Error")
         assert_equal(1998, new_person.birthyear, "Error")
+    end
+
+    def test_upg7
+        assert_equal(0, 0.fib, "Error")
+        assert_equal(1, 1.fib, "Error")
+        assert_equal(1, 2.fib, "Error")
+        assert_equal(2, 3.fib, "Error")
+        assert_equal(3, 4.fib, "Error")
+        assert_equal(5, 5.fib, "Error") 
+        assert_equal(8, 6.fib, "Error")
+        assert_equal(13, 7.fib, "Error") 
+        assert_equal(21, 8.fib, "Error") 
+        assert_equal(34, 9.fib, "Error") 
+        assert_equal(55, 10.fib, "Error")   
+    end
+
+    def test_upg8
+        assert_equal("LOL", "Laugh out loud".acronym, "Error")
+        assert_equal("DWIM", "Do what I mean!!".acronym, "Error")
+        assert_equal("DWIM", "Do what I mean! !".acronym, "Error")
+    end
+
+    def test_upg9
+        assert_equal([2, 3, 1], [1,2,3].rotate_left, "Error")
+        assert_equal([1, 2, 3], [1,2,3].rotate_left(3), "Error")
+    end
+
+    def test_uppg10
+        assert_equal("Brian", find_username("USERNAME: Brian"))
+        assert_equal("Brian", find_username("USERaksjdNAME: Brian"))
+        assert_equal("", find_username(": Brian"))
+        assert_equal("", find_username(" : Brian"))
+        assert_equal("", find_username("USERNAME!!: Brian"))
+        assert_equal("Brian", find_username("USER\nNAME: Brian"))
+        assert_equal("Brian!", find_username("USERNAME: Brian!"))
+    end
+
+    def test_upg11
+        require 'open-uri.rb'
+        html = URI.open("http://www.google.com/") { |f| f.read }
+
+        assert_equal([2, 3, 1], tag_names(html), "Error")
+        assert_equal([1, 2, 3], [1,2,3].rotate_left(3), "Error")
     end
 end
