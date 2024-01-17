@@ -3,32 +3,35 @@ Det gör att det i många fall går att skriva python-kod, och sedan kanske lös
 Ofta kan Rubys felmeddelanden ge förslag. Vi har lärt oss genom en blandning av chatgpt, googling och föreläsnings-slidesen. 
 Vi googlar efter namn på metoder och inbyggda funktioner som vi misstänker finns i språket. 
 Exempelvis antar vi att det finns en funktion för att lägga in element i slutet av en lista. 
-I python heter den "insert", så vi testar det. Det ger ett fel. 
+I python heter den "insert", så vi testar det. Det ger ett fel. Ett annat liknande fel vi gjorde var att använda "this" i objekt. Det visade sig heta "self".
 Vi googlar och hittar att den heter "push" i Ruby. Chatgpt använder vi för frågor som är svåra att googla på. 
 Vi har aldrig sett denna användning av "block". De verkar specifieras som en parameter, men de skrivs utanför funktionsanrop. 
 Vad det används till tycker vi verkar vara samma som labda-funktioner i andra språk.
 Något vi aldrig har sett är möjligheten att kalla på funktioner utan att använda paranteser. 
 Nånting som känns lite irriterande är sättet att ange medlemsvariabler - "@".
 
-I uppgift 1 tolkar vi det som om man behöver ta hur många gånger en upprepning ska ske ooch göra den den mängd gånger vi testar detta genom att öka värdet på en variable.
+Som först intryck verkar Ruby vara väldigt andvändbart till kortare skript eller algoritmer, eftersom som det är lätt att skriva och har många inbyggda funktioner. Det känns ganska likt Python, med de största skillnaderna att det verkar vara mer objektorienterat samt att syntaxen godkänner mer.
 
-I uppgift 2 tolkar vi det som att man inte behöver bry sig om 0 då det inte är ett positivt heltal så man får inte sicka in den och för faultets beräkning gils den som en 1a.
+I uppgift 1 tolkar vi det som om man behöver ta hur många gånger en upprepning ska ske och göra det den mängd gånger som anges. Vi testar detta genom att öka värdet på en variable.
 
-I uppgift 3 så ska man bara hitta det längsta ordet i en arrya genomför genom en length check.
+I uppgift 2 tolkar vi det som att man inte behöver bry sig om 0 då det inte är ett positivt heltal, så man får inte skicka in den.
 
-I uppgift 4 så antar vi att det är som i uppgift 3 men checken ska ske genom ett insikat block.
+I uppgift 3 så ska man bara hitta det längsta ordet i en array, vilket genomförs genom att kolla längden på alla ord.
 
-I uppgift 5 så ska man ha en person med ett namn och efter namn vi inistilizerar den med tomma stränger och sen ska man kunna sätta det med varible.fullname = 
-och så ska man kunna anropa det fulla namnet utan att det sparas som medlems variable.
+I uppgift 4 så antar vi att det är som i uppgift 3 men jämförelsen ska ske genom ett inskickat block.
 
-I uppgift 6 skulle man ha en person med ålder som ska helatiden matcha med sitt födles år. Man ska inte behöva sicka in varibler utan i inistilizeringen.
+I uppgift 5 så ska man ha en person med ett namn och efter namn. Vi inisialiserar den med tomma stränger, och sen ska man kunna sätta hela namnet med <variable>.fullname =. Man kunna anropa det fulla namnet utan att det sparas som medlemsvariabel.
 
-I uppgift 7 gjorde om ett tall till dens fabunaci tal vi tolka detta som att det skulle bli 5 skulle bil 5 altså skulle 5 vara F5.
+I uppgift 6 skulle man ha en person med ålder som ska hela tiden matcha med sitt födelseår. Uppdaterar man åldern ska födelseåret uppdateras, och vice versa
 
-I uppgift 8 Skulle man ta Den första bockstaven i av alla ord i en arry men det får inte vara karaktärer utan måsta vara bockstäver. 
+I uppgift 7 gjorde om ett tal till dess motsvarande fibonacci-tal. 
 
-I uppgift 9 skulle man rotera arryen ett steg vänster där det första nummret ska bli sista. 
+I uppgift 8 Skulle man ta den första bokstaven i av alla ord i en array, men det får inte vara karaktärer utan måsta vara bokstäver. 
 
-I uppgift 10 Skulle man hitta ett : och hämta ut allt efter det och returna det resultatet
+I uppgift 9 skulle man rotera en array till vänster så det första elementet ska bli sista. 
+
+I uppgift 10 Skulle man hitta ett ":" och hämta ut allt efter det och returna det resultatet
 
 I uppgift 11 skulle man hitta alla HTML-tags från en hemsida.
+
+I allmänhet var inte uppgiften alltför svår. Det lättaste var att mycket kunde göras med minimal googling, eftersom mycket fanns inbyggt samt att syntaxen tillåter flera sätt att skriva någonting. Tillsammans med att uppgifterna liknar många från TDP002 blev det smidigt. Det svåraste var nog regex, eftersom det tog lite tid att första hur det inbyggda biblioteket funkade och vilka funktioner som fanns.

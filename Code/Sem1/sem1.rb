@@ -1,5 +1,5 @@
 #sudo gem install test-unit to install test_unit
-#läste webhemsida instructioner.
+#läste webhemsida instruktioner.
 
 
 require "date"
@@ -10,7 +10,7 @@ def n_times(value, &block)
     value.times do 
         block.call
     end
-    return value # Specificerar return för att enkelt veta vad functionen returnera
+    return value # Specificerar return för att enkelt veta vad funktionen returnerar
 end
 
 class Repeat
@@ -24,14 +24,15 @@ class Repeat
 end
 
 
-#Uppgift2 
+#Uppgift 2 
 #Fråga klass kamrat och chatgpt om hur Range#inject
-# 0 är inte ett positivt heltal
+#0 är inte ett positivt heltal
 def factorial(n)
     return (1..n).inject(:*)
 end
 
-#Uppgift3 Antog att length fanns och kopiera hur man iterarea med en for loop genom en sträng från föreläsningen
+#Uppgift 3 
+#Antog att length fanns och kopierade hur man iterera med en for loop genom en sträng från föreläsningen
 def longest_string(list_of_words)
     longest_word = ""
     for word in list_of_words do
@@ -42,7 +43,7 @@ def longest_string(list_of_words)
     return longest_word
 end
 
-#Uppgift4
+#Uppgift 4
 def find_it(list_of_values, &block)
     longest_word = list_of_values[0]
     for value in list_of_values do
@@ -54,7 +55,7 @@ def find_it(list_of_values, &block)
     
 end
 
-#Uppgift5
+#Uppgift 5
 class PersonName
 
     #initialiserar namnet med tomma strängar
@@ -79,6 +80,8 @@ class PersonName
         @name = name[0]
         @surname = name[1]
     end
+    
+    attr_reader :name, :surname
 end
 
 #uppgift 6
@@ -110,7 +113,6 @@ end
 
 # Uppgift 7
 # Kålla hur man accesa inbygda klasser i föreläsning slidens
-# Self fick från chat gpt
 class Integer
     def fib()
         if self == 0
@@ -122,7 +124,7 @@ class Integer
     end
 end
 
-#Uppgift8
+#Uppgift 8
 class String
     def acronym
         words = self.split
@@ -163,14 +165,11 @@ def find_username(str)
     return reg[2] 
 end
 
-#Uppgitf 11 
+#Uppgift 11 
 def tag_names(html)
     matches = html.scan(/<([a-z]+).*?>/).uniq
     return matches
 end
 
 #Uppgift 12
-def regnr?(str)
-    #return \[A\.find(str).bool
-end
 

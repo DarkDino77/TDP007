@@ -1,4 +1,4 @@
-require "./sem1"
+require "./sem1.rb"
 require "test-unit"
 class Test_sem < Test::Unit::TestCase
 
@@ -31,6 +31,7 @@ class Test_sem < Test::Unit::TestCase
         assert_equal("apelsin", longest_string(["apelsin", "banan", "citron"]))
         assert_not_equal("banan", longest_string(["apelsin", "banan", "citron"]))
         assert_not_equal("citron", longest_string(["apelsin", "banan", "citron"]))
+        assert_equal("ci     tron", longest_string(["ci     tron", "banan"]))
     end
 
     def test_upg4
