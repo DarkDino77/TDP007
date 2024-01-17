@@ -1,4 +1,14 @@
-Ruby verkar ganska smidigt att lära sig eftersom det finns så många sätt att skriva samma sak. Det gör att det i många fall går att skriva python-kod, och sedan kanske lösa eventuella mindre fel. Ofta kan Rubys felmeddelanden ge förslag. Vi har lärt oss genom en blandning av chatgpt, googling och föreläsnings-slidesen. Vi googlar efter namn på metoder och inbyggda funktioner som vi misstänker finns i språket. Exempelvis antar vi att det finns en funktion för att lägga in element i slutet av en lista. I python heter den "insert", så vi testar det. Det ger ett fel. Vi googlar och hittar att den heter "push" i Ruby. Chatgpt använder vi för frågor som är svåra att googla på. Vi har aldrig sett denna användning av "block". De verkar specifieras som en parameter, men de skrivs utanför funktionsanrop. Vad det används till tycker vi verkar vara samma som labda-funktioner i andra språk. Något vi aldrig har sett är möjligheten att kalla på funktioner utan att använda paranteser. Nånting som känns lite irriterande är sättet att ange medlemsvariabler - "@".
+Ruby verkar ganska smidigt att lära sig eftersom det finns så många sätt att skriva samma sak. 
+Det gör att det i många fall går att skriva python-kod, och sedan kanske lösa eventuella mindre fel. 
+Ofta kan Rubys felmeddelanden ge förslag. Vi har lärt oss genom en blandning av chatgpt, googling och föreläsnings-slidesen. 
+Vi googlar efter namn på metoder och inbyggda funktioner som vi misstänker finns i språket. 
+Exempelvis antar vi att det finns en funktion för att lägga in element i slutet av en lista. 
+I python heter den "insert", så vi testar det. Det ger ett fel. 
+Vi googlar och hittar att den heter "push" i Ruby. Chatgpt använder vi för frågor som är svåra att googla på. 
+Vi har aldrig sett denna användning av "block". De verkar specifieras som en parameter, men de skrivs utanför funktionsanrop. 
+Vad det används till tycker vi verkar vara samma som labda-funktioner i andra språk.
+Något vi aldrig har sett är möjligheten att kalla på funktioner utan att använda paranteser. 
+Nånting som känns lite irriterande är sättet att ange medlemsvariabler - "@".
 
 I uppgift 1 tolkar vi det som om man behöver ta hur många gånger en upprepning ska ske ooch göra den den mängd gånger vi testar detta genom att öka värdet på en variable.
 
