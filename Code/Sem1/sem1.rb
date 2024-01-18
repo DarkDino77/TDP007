@@ -147,7 +147,7 @@ class Array
         steps.times do 
             for i in (0..length) do
                 temp = self.shift
-                self.push(temp)
+                self.push(self.shift)
             end
         end
         return self
