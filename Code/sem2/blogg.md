@@ -4,3 +4,13 @@ Vi återanvände all kod. Programmet funkade så att vi spara raderna från tabe
 Vi la till en check för att kolla om filen vi söker efter finns. Det kom vi på att göra efter vi började skriva tester.
 
 Vi lärde oss av labbass att ett "!" efter en funktion innebär ofta att funktionen kommer ändra på objektet själv, medans om "!" utelämnas kommer funktionen returnera ett nytt objekt. 
+
+## Tester
+Det var lite svårt att utforma tester här på grund av något som också dök upp i sista deluppgiften från förra seminariet. De funktioner vi har byggt är de vi använder för att (förhoppningsvis) få rätt svår på frågan. Eftersom vi inte har ett angivet svar som vi vet är rätt så har vi ingenting att testa emot. Det vi har gjort nu för att fluffa till testfilen är helt enkelt att ange returvärdet från funktionerna som det förväntade resultatet, vilket inte testar något överhuvudtaget.
+
+# Uppgift 2
+
+Det var väldigt svårt att läsa standarderna hcalendar och hcard. 
+
+## Felhantering
+Vi funderade på om någon felhantering skulle tillämpas, exempelvis för att kolla filsökvägar/urler till XML-dokumenten. Vi kom fram till att det inte riktigt finns någon poäng på denna skala. Kollar vi efter inkorrekta urler, avbryter funktionen, och returnerar ett felmeddelande, gör vi precis samma sak som ruby-interpretatorn redan gör åt oss. Det hade varit nödvändigt vid en större program där vi inte vill att _hela_ programmet ska avbrytas vid ett sådant fel, men i detta program är det precis det vi vill.
