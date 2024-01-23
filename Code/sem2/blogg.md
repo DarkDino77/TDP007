@@ -10,7 +10,7 @@ Det var lite svårt att utforma tester här på grund av något som också dök 
 
 # Uppgift 2
 
-Det var väldigt svårt att läsa standarderna hcalendar och hcard. 
+Det var väldigt svårt att läsa standarderna hcalendar och hcard. Svårt att veta exakt vad man ska ta ut från filen och i vilket format man ska ta ut det i. Vi valde att ploka ut datum och start tid, summary , description, location och uid då dessa finns med i hcalnder standraden. Det skulle inte vara särskilt svårt att lägga till ytligare specifik data delar. Utöver detta finns hela html koden undan sparad i ruby objecktet så det är möjligt att ta med all information på så vis.   
 
 ## Felhantering
 Vi funderade på om någon felhantering skulle tillämpas, exempelvis för att kolla filsökvägar/urler till XML-dokumenten. Vi kom fram till att det inte riktigt finns någon poäng på denna skala. Kollar vi efter inkorrekta urler, avbryter funktionen, och returnerar ett felmeddelande, gör vi precis samma sak som ruby-interpretatorn redan gör åt oss. Det hade varit nödvändigt vid en större program där vi inte vill att _hela_ programmet ska avbrytas vid ett sådant fel, men i detta program är det precis det vi vill.

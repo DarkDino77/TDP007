@@ -6,6 +6,8 @@ class Vevent
         @datetime = @node.css("*[class='dtstart']").text 
         @summary = @node.css("*[class='summary']").text 
         @description = @node.css("*[class='description']").children.css("p").text
+        @uid = @node.css("*[class='url uid']").first['href']
+        
 
         @location = {}
         locationRoot = @node.css("*[class='location']")
@@ -14,9 +16,10 @@ class Vevent
         @location["region"] = locationRoot.css("*[class='region']").text
         @location["locality"] = locationRoot.css("*[class='locality']").text
     end
-    attr_reader :datetime, :description, :author, :location, :summary
+    attr_reader :datetime, :description, :location, :summary, :uid
 end
-def main(file)
+
+def find_all_calander_events(file)
     src = nil
     if file.start_with?("http")
         src = URI.open(file)
@@ -26,7 +29,6 @@ def main(file)
     if !src; return; end;
     doc = Nokogiri::XML(src)
 
-    node_id = "vevent"
     # Loop through all div elements (or adjust the selector as needed)
     veventsArray = []
     doc.css('div[class="vevent"]').each do |node|
@@ -35,4 +37,3 @@ def main(file)
     
     return veventsArray
 end
-main("./events.html")
