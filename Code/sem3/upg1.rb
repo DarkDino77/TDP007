@@ -1,50 +1,62 @@
 class Person
     attr_reader :points
-    def initialize(car,posnr,licensage,gender,age)
+    def initialize(car,zip,license_age,gender,age)
         @car = car
-        @posnr = posnr
-        @licensage = licensage
+        @zip = zip
+        @license_age = license_age
         @gender = gender
         @age = age
         @table = {"carbrand" => @car, 
-                  "posnr" => @posnr,
-                  "licensage" => @licensage,
+                  "zip" => @zip,
+                  "license_age" => @license_age,
                   "gender" => @gender,
                   "age" => @age}
         @points = 0
+        @rules_factor = 1
         
     end
     def evaluate_policy(filename)
         file_content = File.read(filename)
         instance_eval(file_content)
-        pp @points
-        return @points
+        @points *= @rules_factor
+        return @points.round(2)
     end
-
-    def method_missing(name, *args)
-        # pp "hello"
+    def calc_points(name, args)
         if args == []
-            return name
+            return 0
         end
-        if (args[0].is_a?(Range) && args[0].include?(@table[name.to_s])) 
-            @points += args[-1]
+        for arg in args[0...-1]
+            if arg.is_a?(String) && arg.include?("*") 
+                arg = arg.gsub("*", ".")
+                arg = Regexp.new("\\A" + arg + "\\z")
+            end
+            if arg.is_a?(Regexp)
+                return args[-1] if arg =~ @table[name.to_s].to_s 
+            end
+            if arg.is_a?(Range) && arg.include?(@table[name.to_s]) 
+                return args[-1]
+            end
+            if arg == @table[name.to_s]
+                return args[-1]
+            end
         end
-        if args[0] != @table[name.to_s]
-            return
-        end
-        p("name, args:", name, args, "\n", "args[0].is_a?(Range): ", args[0].is_a?(Range), "args[0].include?(@table[name.to_s]): ", args[0].include?(@table[name.to_s]))
-        
-        @points += args[-1]
-        #     if args[-1] == "Poäng"
-        #         pp table[name] = {}
-        #     else
-        #         pp table[&:last][name] = args[-1]
-        #     end
-        # end
+        return 0
     end
-
+    def method_missing(name, *args)
+        if name.to_s == "rule"
+            rule_points = args[-1]
+            fail = false
+            for arg in args[0...-1]
+                name, arg = arg
+                if calc_points(name, [arg, rule_points]) == 0
+                    fail = true
+                end
+            end
+            if !fail
+                @rules_factor *= rule_points
+            end
+        else
+            @points += calc_points(name, args)
+        end
+    end
 end
-
-test = Person.new("Fiat",58647,1,"M",22)
-test.evaluate_policy("./policy.rb")
-pp test.table
