@@ -238,12 +238,14 @@ end
 
 class LogicalParser
   attr_reader :variables, :logicParser
-  
+  def variables
+    @@variables
+  end
   def initialize
-    @@variables = Hash.new
+    @@variables = {}
     @logicParser = Parser.new("logical parser") do
       token(/\s+/)
-      token(/[a-zA-Z_]\w*/) { |m| m.to_s }
+      token(/[a-zA-Z_]\w*/) { |m| m }
       token(/\(/) { '(' }
       token(/\)/) { ')' }
       
@@ -252,25 +254,33 @@ class LogicalParser
         match(:expr)
       end
       rule :assign do
-        match("(", "set", :var, :expr, ")"){ |_, _, a, b, _| @@variables[a] = b }
+        match("(", "set", :var, :expr, ")"){ |_, _, a, b, _|
+          @@variables[a] = b
+          }
       end
       rule :expr do
-        match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| a && b }
-        match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| a || b }
-        match("(", "not", :expr, ")"){ |_, _, a, _| !a }
+        def evaluate(var) 
+          @@variables.key?(var) ? @@variables[var] : var
+        end
+        match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) || evaluate(b) }
+        match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) && evaluate(b) }
+        match("(", "not", :expr, ")"){ |_, _, a, _| !evaluate(a) }
         match(:term)
       end
       rule :term do
-        match(:var) 
         match("true"){ true }
         match("false"){ false }
+        match(:var)
       end
       rule :var do
-        match(/[a-zA-Z_]\w*/) { |m| @@variables.key?(m.to_s) ? @@variables[m.to_s] : m}
+        match(/[a-zA-Z_]\w*/) { |m|
+          p "variables: ", @@variables
+          m
+        }
       end
     end
   end
-  
+ 
   def done(str)
     ["quit","exit","bye","done",""].include?(str.chomp)
   end
@@ -308,4 +318,3 @@ end
 # => 306
 
 LogicalParser.new.logic
-
