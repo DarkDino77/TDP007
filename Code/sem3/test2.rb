@@ -46,8 +46,8 @@ class TestLogicalParser < Test::Unit::TestCase
     @parser.logicParser.parse('( set x true )')
     @parser.logicParser.parse('( set y false )')
     @parser.logicParser.parse('( set z true )')
-    result = @parser.logicParser.parse('( and x ( or y z ) )')
-    assert_equal(true, result)
+    result = @parser.logicParser.parse('( and ( and y z ) ( or x z ) )')
+    assert_equal(false, result)
   end
 
   def test_nested_logical_expression
@@ -85,5 +85,12 @@ class TestLogicalParser < Test::Unit::TestCase
     result = @parser.logicParser.parse('( not false )')
     assert_equal(true, result)
 
+  end
+  def test_unassigned_variable
+    assert_raise(StandardError) { @parser.logicParser.parse("( and x y )") }
+    assert_raise(StandardError) { @parser.logicParser.parse("( or x y )") }
+    assert_raise(StandardError) { @parser.logicParser.parse("( not x )") }
+    assert_raise(StandardError) { @parser.logicParser.parse(" x ") }
+    assert_raise(StandardError) { @parser.logicParser.parse("( set x y )") }
   end
 end

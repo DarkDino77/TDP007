@@ -259,24 +259,46 @@ class LogicalParser
           }
       end
       rule :expr do
-        def evaluate(var) 
-          @@variables.key?(var) ? @@variables[var] : var
-        end
-        match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) || evaluate(b) }
-        match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) && evaluate(b) }
-        match("(", "not", :expr, ")"){ |_, _, a, _| !evaluate(a) }
+
+        # def evaluate(var) 
+        #   if var.is_a?(TrueClass) then
+        #     return true
+        #   end
+        #   if var.is_a?(FalseClass) then
+        #     return false
+        #   end
+          
+        #   if @@variables.key?(var)
+        #    return @@variables[var]
+        #   end
+        #   # Why tho
+        #   #Funkar det?
+        #   raise StandardError.new "#{var} is undefined" 
+        # end
+
+        # match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) || evaluate(b) }
+        # match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) && evaluate(b) }
+        # match("(", "not", :expr, ")"){ |_, _, a, _| !evaluate(a) }
+        # match(:term)
+        match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| a || b }
+        match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| a && b }
+        match("(", "not", :expr, ")"){ |_, _, a, _| !a }
         match(:term)
+
       end
       rule :term do
         match("true"){ true }
         match("false"){ false }
-        match(:var)
+        match(:var) { |m|     
+            if !@@variables.key?(m)
+            raise StandardError.new "#{m} is undefined"
+          end
+
+          @@variables[m] }
+          
       end
       rule :var do
-        match(/[a-zA-Z_]\w*/) { |m|
-          #p "variables: ", @@variables
-          m
-        }
+        match(/[a-zA-Z_]\w*/) { |m| m }
       end
     end
   end
@@ -316,5 +338,4 @@ end
 # => 3
 # [diceroller] (2+8*1d20)*3d6
 # => 306
-
 #LogicalParser.new.logic

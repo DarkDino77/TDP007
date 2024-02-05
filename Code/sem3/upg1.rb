@@ -6,6 +6,9 @@ class Person
         @license_age = license_age
         @gender = gender
         @age = age
+
+        # Hash används för att mappa kategorier från DSLen till medlemsvariabler.
+        # Vi kan då komma åt personens bilmärke med @table["carbrand"] 
         @table = {"carbrand" => @car, 
                   "zip" => @zip,
                   "license_age" => @license_age,
@@ -22,9 +25,13 @@ class Person
         return @points.round(2)
     end
     def calc_points(name, args)
+        # Denna funktions används för att kolla om en regel appliceras på personen.
         if args == []
             return 0
         end
+
+        # En loop används för att kolla flera matchningar på en rad,
+        # exempelvis 'carbrand "BMW", "Volvo", "Fiat", 4
         for arg in args[0...-1]
             if arg.is_a?(String) && arg.include?("*") 
                 arg = arg.gsub("*", ".")
@@ -36,6 +43,11 @@ class Person
             if arg.is_a?(Range) && arg.include?(@table[name.to_s]) 
                 return args[-1]
             end
+
+            # Detta är det mest generella. Här kollas om "arg",
+            # vilket skulle vara "BMW" i raden 'carbrand "BMW", 2,
+            # är detsamma som @table["carbrand"], vilket är det bilmärke
+            # som personen har.
             if arg == @table[name.to_s]
                 return args[-1]
             end
@@ -44,6 +56,10 @@ class Person
     end
     def method_missing(name, *args)
         if name.to_s == "rule"
+            # Här har vi ett specialfall för "rule".
+            # Eftersom en sådan rad anger flera regler kollar om flera regler uppfylls
+            # behövde vi göra den checken till en funktion som kan återanvändas och
+            # vars resultat sparas.
             rule_points = args[-1]
             fail = false
             for arg in args[0...-1]
