@@ -245,10 +245,10 @@ class LogicalParser
     @@variables = {}
     @logicParser = Parser.new("logical parser") do
       token(/\s+/)
-      token(/[a-zA-Z_]\w*/) { |m| m }
       token(/\(/) { '(' }
       token(/\)/) { ')' }
-      
+      token(/[a-zA-Z_]\w*/) { |m| m }
+
       start :valid do 
         match(:assign)
         match(:expr)
@@ -274,7 +274,7 @@ class LogicalParser
       end
       rule :var do
         match(/[a-zA-Z_]\w*/) { |m|
-          p "variables: ", @@variables
+          #p "variables: ", @@variables
           m
         }
       end
@@ -317,4 +317,4 @@ end
 # [diceroller] (2+8*1d20)*3d6
 # => 306
 
-LogicalParser.new.logic
+#LogicalParser.new.logic

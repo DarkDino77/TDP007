@@ -25,3 +25,5 @@ Finns kommentarer i koden
 
 # Uppgift 2
 Vi stötte på ett problem vi blev helt förvirrade av. När vi använde "&&" för att parsa "or" samt "||" för att parsa "and", verkade vi få rätt resultat. Efter en stund märkte vi att 
+
+

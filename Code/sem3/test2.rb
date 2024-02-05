@@ -63,4 +63,27 @@ class TestLogicalParser < Test::Unit::TestCase
     @parser.logicParser.parse('( set reassign false )')
     assert_equal(false, @parser.variables['reassign'])
   end
+
+  def test_true_false
+
+    result = @parser.logicParser.parse('( and true true  )')
+    assert_equal(true, result)
+    result = @parser.logicParser.parse('( and true false  )')
+    assert_equal(false, result)
+    result = @parser.logicParser.parse('( and false false  )')
+    assert_equal(false, result)
+
+    result = @parser.logicParser.parse('( or true true  )')
+    assert_equal(true, result)
+    result = @parser.logicParser.parse('( or true false  )')
+    assert_equal(true, result)
+    result = @parser.logicParser.parse('( or false false  )')
+    assert_equal(false, result)
+
+    result = @parser.logicParser.parse('( not true )')
+    assert_equal(false, result)
+    result = @parser.logicParser.parse('( not false )')
+    assert_equal(true, result)
+
+  end
 end
