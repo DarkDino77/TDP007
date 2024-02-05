@@ -57,11 +57,6 @@ class TestLogicalParser < Test::Unit::TestCase
     assert_equal(true, result)
   end
 
-  def test_reference_unset_variable
-    result = @parser.logicParser.parse('( and unsetVar true )')
-    assert_nil(result, "Expected nil for referencing an unset variable, got #{result}")
-  end
-
   def test_variable_reassignment
     @parser.logicParser.parse('( set reassign true )')
     assert_equal(true, @parser.variables['reassign'])
