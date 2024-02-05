@@ -1,0 +1,43 @@
+Reflektion kring nytt språk
+dag 1
+Vi har kollat en del på flertalet hemsidor som geeksforgeeks, ruby-docs, stackoverflow etc. För att hitta lämpliga funktioner för projektet. Några saker vi kollade på idag var filhantering, eval(), hash samt regex. Vi har insett att ruby kan både vara väldigt petig om syntaxer men samtidigt inte bry sig alls.
+
+dag 2
+Vi har nu skrivit klart programmet för väder beräkningen. Många delar återanvändes men vi stötte återigen på problem med hash, där hashen råkade konverteras till array. Med detta känns det som att vi fått ett bättre grepp på hur ruby funkar.
+
+dag 3
+Idag skrev vi vidare på uppgift 1 och blev klara med resten av test_fallen samt väder koden. Vårat största problem med väder koden var att skriva testfallen eftersom utskriften för tabellen var väldigt lång, det slutade med att vi skrev nya .txt filer för tabell utskriften med de tre första raderna för varje tabell och testade dem istället.
+Efter vi blev klara med uppgift 1 började vi på uppgift 2. En stor del av labbpasset spenderade vi på att lära oss mer om hur REXML parsern funkade samt hur man navigerade XML-filer med XPath. Utöver XML och XPath skrev vi kod för programmet och behövde kolla upp andra triviella saker som hur man hanterar arrays och hur filhantering fungerar i Ruby.
+Källor:
+https://www.w3schools.com/xml/xpath_syntax.asp
+https://ruby-doc.org/core-3.0.1/Array.html
+https://stackoverflow.com/
+
+Uppgift 1
+Reflektion kring olika tekniker
+Hash i Ruby är en containerklass som vi inte uppskattade eftersom vi försökte inserta nya objekt in i den på flertalet sätt men inget av dem ville funka. Vi kan se styrkan med den, dock är den väldigt irriterande att hantera.
+Eval är evil (haha) men var i vårat sammanhang väldigt användbart för vårat ändamål. Med hjälp av eval insåg vi att vi inte behövde splitta strängar för att räkna ut skillnaden mellan insläppta mål och gjorda mål. Detta sparade kanske 3 rader kod. Evals syfte är att tolka strängar som Ruby-kod.
+Regex är kul.
+Vi använde en symbol vid namn "&:chomp", den är använd för att ta bort new line tecken(\n) när man filhanterar. Denna symbol har varit användbar och känns varken kraftig eller svag.
+Vi tyckte att sort_by funktionen funkade lite fult eftersom den vill hantera arrays. Detta leder till att den kör en type conversion på objektet. Vi stötte då på problemet att den skrev över våran hash med en array istället så vi inte kunde söka på nycklar. Vi känner däremot en bättre förståelse till ruby som språk nu.
+
+Dokumentation av tankesätt
+Vi tänkte till en början hur vi ville dela upp namnen och de två talen så att vi kunde hantera dem separat. Formeln för detta blev två regex-uttryck där en matchade namnet och den andra matchade de två värdena samt minustecknet mellan dem för varje rad.
+Efter att ha utvecklat regex-uttryck behövde vi ha gjort filhantering på ett sätt som lät oss hantera varje rad för sig, något som vi tyckte var likt pythons filhanteringssystem.
+När vi hade läst in filen som vi skulle utgå ifrån tänkte vi att det bästa sättet vi kunde använda för att hantera filens olika rader var genom en .each loop. i .each loopen separerade vi namnet och skillnaden mellan mål värdena i olika variabler som vi sedan slog ihop till en hash och slängde in i våran variabel @results som vi sedan sorterade.
+För att returnera det värsta laget (laget med minst skillnad i antal gjorda och insläppta mål) tog vi den sorterade listan och returnerade det sista värdet i containern.
+Likheter mellan programmen är många, några sådana är hur vi returnerar tabellen för de två programmen ('return @results.sort_by(&:last).reverse'), detta går över alla funktioner i båda program förutom initialize. Vi läser in textfiler på samma sätt på båda programmen. För testfilerna har vi väldigt liknande tester där vi också testar att get_table funkar med småskaliga .txt-filer.
+
+
+Uppgift 2
+Reflektion kring olika tekniker
+Vi använde oss av en stor del tekniker från föreläsningarna, specifikt REXML samt XPath. Dessa använde vi oss av vid exempelvis rad 14 - 18.
+En stor sak vi sökte oss fram till var en lösning till hur man söker efter ett specifikt element utan att använda en each loop. Det fann vi på ruby-doc.org. Detta använde vi för att ta ut texten ur dokumentet och vi fann det väldigt användbart, det sparar nog en del minne att inte behöva kolla genom hela dokumentet utan bara kolla första instansen av det sökta elementet.
+Något vi fann som hjälpte oss utnyttja each loopen för varje div var hur man kollade 'child' element till den man redan står i, vi fann på w3schools att man kunde använda '.' på liknande sätt till hur man använder '.' i terminal. Detta var skönt att använda eftersom det kändes bekant.
+Att spara koden som en array med arrayer för de olika eventen var förvånansvärt svårt. Efter flertalet försök antog vi att det problemen vi stötte på var att vi råkade spara en array med referenser till en annan array vilket ledde till att slutresultatet hade en massa element som var kopior av varandra. Efter många försök fann vi en lösning som är rad 13 - 18.
+
+Dokumentation av tankesätt
+Vi tänkte först att vi ville hitta vart all information för de olika eventen fanns, något som vi såg fanns under div klasserna med attributet class='vevent'. Vi använde sedan dessa för att iterera genom varje event.
+Under varje iteration skulle namnet på eventet, tiden de skulle hända samt en beskrivning av eventen sparas. För att göra detta använde vi oss av temp.elements[ELEMENT] för att hitta den specifika informationen och sedan .text för att ta emot texten som de innehöll.
+Efter det skickades alla de in i en klassvariabel i form av en array, nämligen @events. På så sätt hade vi all information vi behövde för varje event i kalendern sparat på ett ställe.
+Till slut skrev vi ut allt, något som var väldigt simpelt eftersom vi sparade det på ett effektivt sätt. För att skriva ut allt itererade vi genom @events och skrev ut varje index för varje element.

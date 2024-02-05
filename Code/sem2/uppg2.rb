@@ -8,7 +8,6 @@ class Vevent
         @description = @node.css("*[class='description']").children.css("p").text
         @uid = @node.css("*[class='url uid']").first['href']
         
-
         @location = {}
         locationRoot = @node.css("*[class='location']")
         @location["org"] =  locationRoot.css("*[class='org fn']").text 
