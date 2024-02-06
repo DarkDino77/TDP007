@@ -246,8 +246,10 @@ class LogicalParser
   def initialize
     # Class variable to store variables
     @@variables = {}
+
     # Instance variable to store a new instance of the Parser class
     @logicParser = Parser.new("logical parser") do
+      
       # Define tokens for whitespace, open and close parentheses, and variable names
       token(/\s+/)
       token(/\(/) { '(' }
