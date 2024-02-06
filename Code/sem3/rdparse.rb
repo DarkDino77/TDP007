@@ -237,55 +237,45 @@ end
 ##############################################################################
 
 class LogicalParser
+  # Getter methods for variables and logicParser
   attr_reader :variables, :logicParser
   def variables
     @@variables
   end
+
   def initialize
+    # Class variable to store variables
     @@variables = {}
+    # Instance variable to store a new instance of the Parser class
     @logicParser = Parser.new("logical parser") do
+      # Define tokens for whitespace, open and close parentheses, and variable names
       token(/\s+/)
       token(/\(/) { '(' }
       token(/\)/) { ')' }
       token(/[a-zA-Z_]\w*/) { |m| m }
 
+      # Define the starting point of the parser
       start :valid do 
         match(:assign)
         match(:expr)
       end
+
+      # Rule for assignment, updating @@variables hash
       rule :assign do
         match("(", "set", :var, :expr, ")"){ |_, _, a, b, _|
           @@variables[a] = b
           }
       end
+
+      # Rule for logical expressions (OR, AND, NOT)
       rule :expr do
-
-        # def evaluate(var) 
-        #   if var.is_a?(TrueClass) then
-        #     return true
-        #   end
-        #   if var.is_a?(FalseClass) then
-        #     return false
-        #   end
-          
-        #   if @@variables.key?(var)
-        #    return @@variables[var]
-        #   end
-        #   # Why tho
-        #   #Funkar det?
-        #   raise StandardError.new "#{var} is undefined" 
-        # end
-
-        # match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) || evaluate(b) }
-        # match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| evaluate(a) && evaluate(b) }
-        # match("(", "not", :expr, ")"){ |_, _, a, _| !evaluate(a) }
-        # match(:term)
         match("(", "or", :expr, :expr, ")"){ |_, _, a, b, _| a || b }
         match("(", "and", :expr, :expr, ")"){ |_, _, a, b, _| a && b }
         match("(", "not", :expr, ")"){ |_, _, a, _| !a }
         match(:term)
-
       end
+
+      # Rule for terminal expressions (true, false, and variables)
       rule :term do
         match("true"){ true }
         match("false"){ false }
@@ -294,9 +284,11 @@ class LogicalParser
             raise StandardError.new "#{m} is undefined"
           end
 
-          @@variables[m] }
-          
+          @@variables[m] 
+        } 
       end
+
+      # Rule for strings names
       rule :var do
         match(/[a-zA-Z_]\w*/) { |m| m }
       end
