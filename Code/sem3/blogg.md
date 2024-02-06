@@ -31,10 +31,7 @@ Vår lösning till uppgift 2 kan hittas i rdparse.rb under klassen LogicalParser
 
 Vi stötte på ett problem vi blev förvirrade av. När vi använde "&&" för att parsa "or" samt "||" för att parsa "and", verkade vi få rätt resultat, vilket är ju omvänt. Efter en stund märkte vi att det berodde på att alla tokens ges till ruby som strängar. Detta skedde eftersom matchningen för variabler gjordes innan strängarna "true" och "false", och variabler (:var) returnerar som strängar. Vi följde specefikationen i uppgiften, men vi märkte att detta går emot principen att de mest specifika matchningar ska göras först. Matchar vi "true" och "false" först kan vi göra om just dessa till booleaner.
 
-Detta måste skrivas om 
-Vi valde att lösa rule expr genom att skriva en evalute funktion som kållar om ett inskickat värde är true false eller en giltig variabel. En alternativ lösning skulle kunnat vara att ha en till regel som skulle använda parsningen till att kålla om vad något exakt är. Det skulle lättast lösas genom att assign skulle ta en en ny regel name som skulle match den nuvarande :var regeln och :var skulle returnera \@\@varibels inlägget som matchar det relevant namnet. Jag hade personligen föredragit att använda en extra regel
-
-
+Ett annat problem vi stötte på var hur man skulle lösa skillnaden mellan att använda ":var" för att tilldela en variabel jämfört med en sträng. Först försökte vi ha den logiken i "rule :var", men då gick det inte att skriva över en existerande variabel. Sedan försökte vi med att ha en funktion som låg under "rule :expr", som alla match cases skulle kalla på. Denna lösning fungerade, men var otillfredsställande. Senare insåg vi att funktionerna som vi hade byggt inte var nödvändiga, eftersom "rule :term" i princip gjorde allt vi ville. Genom att använda ett block runt "match(:var)" kunde vi manipulera strängen till den önskade variabeln och fortfarande ändra på variabelns värde, eftersom "rule :assign" kallar direkt på ":var" utan att gå igenom ":term".
 
 Genom att spara alla variabler i en statisk klass variabel var det väldigt simpelt att skriva tester.
 
