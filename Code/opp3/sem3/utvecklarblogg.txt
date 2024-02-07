@@ -1,0 +1,25 @@
+Arbete med uppgift 1:
+
+Att arbeta med uppgift 1 har varit mer frustrerande än att jobba med tidigare uppgifter. 
+Lösningarna kändes inte lika självklara som tidigare och vi fick ofta tänka om halvvägs genom en tankeprocess.
+Det var intressant att få jobba med att läsa in vanlig text som funktioner, och upptäcka vilka svårigheter detta innebar. 
+Det svåraste var nog att läsa in postkoderna och de andra sifferbaserade kriterierna, då de inte automatiskt omvandlades till funktionsanrop.
+Detta valde vi dock att lösa genom att göra hela raden till en sträng och lägga till en bokstav för identifiering innan.
+Det var kanske inte den vackraste lösningen i världen, men det gjorde att vi kunde skilja på dem och fortfarande läsa in dem. 
+Det var även en utmaning att felsöka de gånger det inte blev rätt. Vi utvecklade testerna jämntmed koden så att vi kunde köra dem för alla olika kategorier, 
+men det var fortfarande ofta svårt att hitta felen när de påverkade funktioner vi upplevde var helt orelaterade till varandra. 
+
+Arbete med uppgift 2:
+
+Koden i sig var inte särskilt svår att skriva. Den var mest att följa strukturen som fanns i instruktionerna, 
+och anpassa den till strukturen som man kunde se i filen "rdparse.rb" som var given. Den tog inte särskilt lång tid att konstruera, utan den mesta tiden lades på att konstruera testfallen. 
+Det som var den största utmaningen var att felsöka när vi skulle testa "(not a)" då den verkade returnera false hur vi än gjorde. 
+Det visade sig att det var för att vi gjorde "not string" vilket returnerar false, eftersom värdet var sparat som en sträng. 
+Det vi kom på i slutändan var att man kunde spara värdet som en bool från början, så slipper man jämföra med strängar. Det låg dock många timmars frustration bakom den upptäckten, 
+trots att det var något som vi borde kommit på tidigare, då det är mer logiskt än att spara dem som strängar. 
+
+Något den problematiken fick oss att inse var att ruby tillåter väldigt mycket. Vi upptäckte inte förens efter ett långt tag att vi jämförde strängar med varandra, eftersom ruby tillät det utan att blinka. 
+Hade det inte gjort det hade vi nog upptäckt problematiken mycket tidigare, och därmed sluppit klura ut hur man omvandlar strängar till bools. 
+Att konstruera testfallen var dock inget komplicerat. Det var endast "assert_true" eller "assert_false" för att kolla så att alla kommandon returnerade det de skulle. 
+Dock, för att kunna genomföra testfallen så skapade vi en alternativ funktion till evaluate, nämligen evaluate_test, som tog in en sträng som vi sedan utvärderar, för att inte testfallen ska vara beroende av inmatning. 
+Den ser för det mesta likadan ut, förutom då att den inte hanterar input från användaren, men det var en avvägning vi bestämde oss för att göra för att lättare kunna testa alla olika fall. 
