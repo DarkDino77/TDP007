@@ -189,9 +189,11 @@ class ArithmeticConstraint
       p "hej"
       not_to_change = a.has_value? ? a : b
       val=out.value.send(inverse_op, not_to_change.value)
+      p "val: ", val
       to_change = ([a,b]-[not_to_change])[0]
       p "changeroos ", not_to_change, to_change
       logger.debug("#{self} : one of #{to_change} updated")
+      to_change.assign(val, self)
     end
     self
   end
@@ -273,6 +275,9 @@ class Connector
   end
   
   def assign(v,setter)
+    if !(v.class == Integer || v.class == Float)
+      raise ContradictionException.new("Must be an integer")
+    end
       if not has_value? then
         @logger.debug("#{name} got new value: #{v}")
         @value=v
@@ -339,8 +344,19 @@ end
 # tv� Connectors. Dessa tv� motsvarar Celsius respektive Fahrenheit och 
 # kan anv�ndas f�r att mata in temperatur i den ena eller andra skalan.
 
+
 def celsius2fahrenheit
-  # Klistra in er kod h�r.
+  "°F = °C × (9/5) + 32"
+  temp_connector = Connector.new("temp_connector")
+  f = Connector.new("F")
+  c = Connector.new("C")
+  a, mult_out = Connector.new("a"), Connector.new("c")
+  b, add_out = Connector.new("b"), Connector.new("f")
+  a.user_assign(1.8)
+  b.user_assign(32)
+  Multiplier.new(c, a, mult_out)
+  Adder.new(mult_out, b, add_out)
+  return add_out, c
 end
 
 # Ni kan d� anv�nda funktionen s� h�r:

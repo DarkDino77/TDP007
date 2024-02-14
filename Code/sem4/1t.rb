@@ -46,4 +46,14 @@ class TestArithmeticConstraints < Test::Unit::TestCase
       @a.user_assign(false)
     end
   end
+  def test_celsius2fahrenheit
+    f, c = celsius2fahrenheit()
+    c.user_assign(0)
+    assert_equal(32, f.value.floor, "Conversion from Celsius to Fahrenheit failed")
+    c.user_assign(100)
+    assert_equal(212, f.value.floor, "Conversion from Celsius to Fahrenheit failed")
+    c.forget_value("user")
+    f.user_assign(100)
+    assert_equal(37, c.value.floor, "Conversion from Fahrenheit to Celsius failed")
+  end
 end
