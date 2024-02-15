@@ -155,7 +155,10 @@ class ArithmeticConstraint
   def initialize(a, b, out)
     @logger=Logger.new(STDOUT)
     @a,@b,@out=[a,b,out]
-    [a,b,out].each { |x| x.add_constraint(self) }
+    [a,b,out].each { |x| 
+      #p "conn 'x' in constraint initalizer: ", x
+      x.add_constraint(self)
+    }
   end
   
   def to_s
@@ -164,34 +167,21 @@ class ArithmeticConstraint
   
   def new_value(connector)
     # p "connector i new_value: ", connector
-    # if !(a.has_value? and b.has_value?)
-    #    return self
-    # end
-    # case connector
-    #   when a
-    #     p "connector är a"
-    #   when b
-    #     p "connector är b"
-    #   when out
-    #     p "connector är out"
-    # end
     if [a,b].include?(connector) and a.has_value? and b.has_value? and 
         (not out.has_value?) then 
       # Inputs changed, so update output to be the sum of the inputs
       # "send" means that we send a message, op in this case, to an
       # object.
+      # p "op i new_value: ", op
       val=a.value.send(op, b.value)
       logger.debug("#{self} : #{out} updated")
       out.assign(val, self)
     end
       # Om out har värde samt att en utav a och b har värde, men inte båda.
     if out.has_value? and (b.has_value? ^ a.has_value?)
-      p "hej"
       not_to_change = a.has_value? ? a : b
       val=out.value.send(inverse_op, not_to_change.value)
-      p "val: ", val
       to_change = ([a,b]-[not_to_change])[0]
-      p "changeroos ", not_to_change, to_change
       logger.debug("#{self} : one of #{to_change} updated")
       to_change.assign(val, self)
     end
@@ -211,6 +201,8 @@ class Adder < ArithmeticConstraint
   def initialize(*args)
     super(*args)
     @op,@inverse_op=[:+,:-]
+    [a,b,out].each { |x| new_value(x) }
+
   end
 end
 
@@ -219,6 +211,8 @@ class Multiplier < ArithmeticConstraint
   def initialize(*args)
     super(*args)
     @op,@inverse_op=[:*,:/]
+    [a,b,out].each { |x| new_value(x) }
+
   end
     
 end
