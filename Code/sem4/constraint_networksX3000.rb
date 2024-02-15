@@ -270,7 +270,7 @@ class Connector
   
   def assign(v,setter)
     if !(v.class == Integer || v.class == Float)
-      raise ContradictionException.new("Must be an integer")
+      raise ContradictionException.new("Must be an integer, was #{v.class}")
     end
       if not has_value? then
         @logger.debug("#{name} got new value: #{v}")
