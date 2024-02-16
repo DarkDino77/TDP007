@@ -1,1 +1,1 @@
-multi.new(2, b, 2/7)
+Lyckades inte lista ut hur man skulle plocka ut rätt värde från Aretmetiska utryck när det aretmetiska utrycket man ska plocka ut inte stämmer överäns med det man ska skapa så jag valde att skapa Sub och divider classer 
