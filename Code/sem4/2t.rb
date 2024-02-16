@@ -34,6 +34,10 @@ class TestConstraintParser < Test::Unit::TestCase
     f = @cp.parse("f=(6/2)*2")
     assert_equal(6, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
+  # def test_svår_div2
+  #   f = @cp.parse("f=7")
+  #   assert_equal(7, f[0].value, "Conversion from Fahrenheit to Celsius failed")
+  # end
   
   def test_simple_addition
     result = @cp.parse("x=2+3")
