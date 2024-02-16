@@ -206,11 +206,31 @@ class Adder < ArithmeticConstraint
   end
 end
 
+class Sub < ArithmeticConstraint
+  
+  def initialize(*args)
+    super(*args)
+    @op,@inverse_op=[:-,:+]
+    [a,b,out].each { |x| new_value(x) }
+
+  end
+end
+
 class Multiplier < ArithmeticConstraint
 
   def initialize(*args)
     super(*args)
     @op,@inverse_op=[:*,:/]
+    [a,b,out].each { |x| new_value(x) }
+
+  end
+    
+end
+class Divider < ArithmeticConstraint
+
+  def initialize(*args)
+    super(*args)
+    @op,@inverse_op=[:/,:*]
     [a,b,out].each { |x| new_value(x) }
 
   end
