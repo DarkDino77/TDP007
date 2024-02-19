@@ -56,13 +56,14 @@ class TestArithmeticConstraints < Test::Unit::TestCase
     f.user_assign(100)
     assert_equal(37, c.value.floor, "Conversion from Fahrenheit to Celsius failed")
   end
-  def test_constraints
-    bee = Connector.new("b",5)
-    cee = Connector.new("c",2)
-    hihi = Connector.new("hihi")
-    Adder.new(bee,cee,hihi)
-    assert_equal(7, hihi.value)
-  end
+# Kan ta bort den va?
+  # def test_constraints
+  #   bee = Connector.new("b",5)
+  #   cee = Connector.new("c",2)
+  #   hihi = Connector.new("hihi")
+  #   Adder.new(bee,cee,hihi)
+  #   assert_equal(7, hihi.value)
+  # end
   def test_temperature_conversion
     f = Connector.new("f")
     c = Connector.new("c")

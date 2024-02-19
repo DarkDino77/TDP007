@@ -166,13 +166,11 @@ class ArithmeticConstraint
   end
   
   def new_value(connector)
-    # p "connector i new_value: ", connector
     if [a,b].include?(connector) and a.has_value? and b.has_value? and 
         (not out.has_value?) then 
       # Inputs changed, so update output to be the sum of the inputs
       # "send" means that we send a message, op in this case, to an
       # object.
-      # p "op i new_value: ", op
       val=a.value.send(op, b.value)
       logger.debug("#{self} : #{out} updated")
       out.assign(val, self)

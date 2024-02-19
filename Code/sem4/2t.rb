@@ -5,40 +5,71 @@ class TestConstraintParser < Test::Unit::TestCase
   def setup
     @cp = ConstraintParser.new
   end
-  def test_lett_sub
+  def test_simple_sub
     f = @cp.parse("f=5-2")
     assert_equal(3, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
 
-  def test_lett_div
+  def test_simple_sub2
+    f,a = @cp.parse("f=5-a")
+    a.user_assign(2)
+    assert_equal(3, f.value, "Conversion from Fahrenheit to Celsius failed")
+  end
+
+  def test_simple_div
     f = @cp.parse("f=6/2")
     assert_equal(3, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
 
-  def test_lett_add
+  def test_simple_div2
+    f,a = @cp.parse("f=6/a")
+    a.user_assign(2)
+    assert_equal(3, f.value, "Conversion from Fahrenheit to Celsius failed")
+  end
+
+  def test_simple_add
     f = @cp.parse("f=6+2")
     assert_equal(8, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
   
-  def test_lett_mult
+  def test_simple_add2
+    f,a = @cp.parse("f=6+a")
+    a.user_assign(2)
+    assert_equal(8, f.value, "Conversion from Fahrenheit to Celsius failed")
+  end
+
+  def test_simple_mult
     f = @cp.parse("f=6*2")
     assert_equal(12, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
+
+  def test_simple_mult2
+    f,a = @cp.parse("f=6*a")
+    a.user_assign(2)
+    assert_equal(12, f.value, "Conversion from Fahrenheit to Celsius failed")
+  end
   
-  def test_svår_sub
+  def test_complex_sub
     f = @cp.parse("f=(5-2)*2")
     assert_equal(6, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
 
-  def test_svår_div
+  def test_complex_div
     f = @cp.parse("f=(6/2)*2")
     assert_equal(6, f[0].value, "Conversion from Fahrenheit to Celsius failed")
   end
-  # def test_svår_div2
-  #   f = @cp.parse("f=7")
-  #   assert_equal(7, f[0].value, "Conversion from Fahrenheit to Celsius failed")
-  # end
-  
+
+  def test_constant
+    f = @cp.parse("f=7")
+    assert_equal(7, f[0].value, "Conversion from Fahrenheit to Celsius failed")
+  end
+
+  def test_reassignment
+    @cp.parse("a=10")
+    result = @cp.parse("a=5")
+    assert_equal(5, result[0].value, "Reassignment failed")
+  end
+
   def test_simple_addition
     result = @cp.parse("x=2+3")
     assert_equal(5, result[0].value, "Simple addition failed")
