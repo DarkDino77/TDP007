@@ -11,9 +11,9 @@ Det svåraste med uppgiften var nog att klura fram just den där if-satsen, men 
 De viktigas testerna var ganska tydliga i denna uppgift. Vi tänker att det gäller att testa constrainst i alla riktingar, alltså testar att var och en connector kan påverka de andra. Testet för temperatur-konvertering inkluderar sedan test för att se att mer komplicerade nätverk även funkar.
 
 # Uppgift 2
-Lyckades inte lista ut hur man skulle plocka ut rätt värde från Aretmetiska utryck när det aretmetiska utrycket man ska plocka ut inte stämmer överäns med det man ska skapa så jag valde att skapa Sub och divider classer då kan man plocka ut "out" värdet från ett varje Aretmetiska utryck gång och inte behöve oroasig med att behöva plocka ut "b" värdet från negativa/dividerande Aretmetiska utryck som representeras som adders respective multipliers.
+Lyckades inte lista ut hur man skulle plocka ut rätt värde från aritmetiska uttryck när det aritmetiska uttrycket man ska plocka ut inte stämmer överäns med det man ska skapa. Jag valde därför att skapa Sub och divider classer då kan man plocka ut "out" värdet från ett varje aritmetiskt uttryck gång och inte behöve oroa sig med att behöva plocka ut "b" värdet från negativa/dividerande uttryck som representeras som adders respektive multipliers.
 
-Man behövde också kolla efter om båda sidorna av ett utryck var en connector i replace conn då ett Aretmetiska utryck inte kommer skapas om man endast har singuära konnektors på båda sidorn. då skapar vi en Aretmetiska utryck genom att avända oss av att f=7 <=> f=7+0. 
+Man behövde också kolla efter om båda sidorna av ett uttryck var en connector i `replace_coon`. I det fallet använder vi oss av att f=7 <=> f=7+0, och skapar ett uttryck. På så sätt kan vi ändå skapa en constraint som kopplar ihop de båda sidorna. 
 
 ## Tester
 Det var också här ganska tydligt vilka tester som är rimliga. Det är enklare att testa här jämfört med exempelvis något typ av användargränssnitt, eftersom där finns det väldigt många olika saker användaren kan skicka in. Här antar vi att klasserna vi skapar används på det sättet dem är tänkt att göra. Här behövdes dock lite fler tester än i uppgift 1, då det finns mycket fler saker som kan gå fel.
