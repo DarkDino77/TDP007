@@ -1,0 +1,5 @@
+UPG1:
+Vid första testningen krävdes det inga större ändringar. Konverteringen från Celcius till Fahrenheit var realtivt lätt. Men konverteringen åt andra hållet var mer av en funderare. Men problamatiken låg i arithmeticConstraints
+ "new_value" funktion som vi med hjälp av existerande if sats och inverse_op kunde lösa. 
+ UPG2:
+ Denhär delen av uppgiften var den mest utamanande och svåråa delen där vi var tvugna att bestiga många problem för det första var det svårt att få en förståelse och uppfattning av strukturen som automatiskt skulle fungera. Men med hjälp av små ändringar och mycket sökande och dialoger så kom vi fram till en lösning.
